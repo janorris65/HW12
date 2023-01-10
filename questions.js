@@ -1,7 +1,7 @@
 const questions = [
   {
     type: "list",
-    name: "employeeType",
+    name: "OpeningMenu",
     message: "Who would you like to add next?",
     choices: [
       "View All Departments",
@@ -9,8 +9,8 @@ const questions = [
       "View All Employees",
       "Add A Department",
       "Add A Role",
-      "Add an Employee",
-      "Update an Employee Role",
+      "Add An Employee",
+      "Update An Employee Role",
       "I am Finished!!",
     ],
   },
@@ -67,4 +67,7 @@ const addARole = [
 
 module.exports = {
   One: questions,
+  Two: addADepartment,
+  Three: addAnEmployee,
+  Four: addARole,
 };

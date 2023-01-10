@@ -8,21 +8,21 @@ const addAnEmployee = questionsImport.Three;
 const addARole = questionsImport.Four;
 
 inquirer.prompt(questions).then((response) => {
-  if (response.OpeningMenu == "I am finished") {
+  if (response.OpeningMenu === "I am finished") {
     // process Exit
-  } else if (response.OpeningMenu == "View All Departments") {
+  } else if (response.OpeningMenu === "View All Departments") {
     // view dept sql
-  } else if (response.OpeningMenu == "View All Roles") {
+  } else if (response.OpeningMenu === "View All Roles") {
     // view roles sql
-  } else if (response.OpeningMenu == "View All Employees") {
+  } else if (response.OpeningMenu === "View All Employees") {
     // view employees sql
-  } else if (response.OpeningMenu == "Add A Department") {
+  } else if (response.OpeningMenu === "Add A Department") {
     // Add department sql
-  } else if (response.OpeningMenu == "Add A Role") {
+  } else if (response.OpeningMenu === "Add A Role") {
     // Add role sql
-  } else if (response.OpeningMenu == "Add An Employee") {
+  } else if (response.OpeningMenu === "Add An Employee") {
     // Add employee sql
-  } else if (response.OpeningMenu == "Update An Employee Role") {
+  } else if (response.OpeningMenu === "Update An Employee Role") {
     // Update Employee sql
   }
 });

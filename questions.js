@@ -65,4 +65,21 @@ const addARole = [
   },
 ];
 
-export { questions, addADepartment, addAnEmployee, addARole };
+const UpdateARole = [
+  {
+    type: "input",
+    name: "updateFirstName",
+    message: "What is the employee's first name",
+  },
+  {
+    type: "input",
+    name: "updateLastName",
+    message: "What is the employee's last name",
+  },
+  {
+    type: "input",
+    name: "updateRole",
+    message: "What is the new role ID?",
+  },
+];
+export { questions, addADepartment, addAnEmployee, addARole, UpdateARole };

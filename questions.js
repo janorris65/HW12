@@ -37,13 +37,13 @@ const addAnEmployee = [
   },
   {
     type: "input",
-    name: "employeeRole",
-    message: "What is the employee's role",
+    name: "employeeRoleID",
+    message: "What is the employee's role ID",
   },
   {
     type: "input",
-    name: "employeeManager",
-    message: "What is their manager's name",
+    name: "employeeManagerID",
+    message: "What is their manager's ID",
   },
 ];
 
@@ -60,8 +60,8 @@ const addARole = [
   },
   {
     type: "input",
-    name: "roleDepartment",
-    message: "What is the department?",
+    name: "roleDepartmentID",
+    message: "What is the department ID?",
   },
 ];
 

@@ -1,12 +1,6 @@
-const inquirer = require("inquirer");
-const { default: Choices } = require("inquirer/lib/objects/choices");
-const questionsImport = require("./questions");
-const questions = questionsImport.One;
-const addADepartment = questionsImport.Two;
-const addAnEmployee = questionsImport.Three;
-const addARole = questionsImport.Four;
-
-const mysql = require("mysql2");
+import inquirer from "inquirer";
+import mysql from "mysql2";
+import { questions } from "./questions.js";
 
 const db = mysql.createConnection(
   {
@@ -15,7 +9,7 @@ const db = mysql.createConnection(
     user: "root",
     // MySQL password
     password: "Rousseau65@",
-    database: "fakecompany1_2023_db",
+    database: "fakecompany_db",
   },
   console.log(`Connected to the fakecompany1_2023_db database.`)
 );
@@ -25,15 +19,15 @@ inquirer.prompt(questions).then((response) => {
     // process Exit
   } else if (response.OpeningMenu === "View All Departments") {
     db.query("SELECT * FROM departments", (err, results) => {
-      console.log(results);
+      console.table(results);
     });
   } else if (response.OpeningMenu === "View All Roles") {
     db.query("SELECT * FROM role", (err, results) => {
-      console.log(results);
+      console.table(results);
     });
   } else if (response.OpeningMenu === "View All Employees") {
     db.query("SELECT * FROM employees", (err, results) => {
-      console.log(results);
+      console.table(results);
     });
   } else if (response.OpeningMenu === "Add A Department") {
     // Add department sql

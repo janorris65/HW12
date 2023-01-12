@@ -65,9 +65,4 @@ const addARole = [
   },
 ];
 
-module.exports = {
-  One: questions,
-  Two: addADepartment,
-  Three: addAnEmployee,
-  Four: addARole,
-};
+export { questions, addADepartment, addAnEmployee, addARole };

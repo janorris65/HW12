@@ -22,13 +22,19 @@ inquirer.prompt(questions).then((response) => {
       console.table(results);
     });
   } else if (response.OpeningMenu === "View All Roles") {
-    db.query("SELECT * FROM role", (err, results) => {
-      console.table(results);
-    });
+    db.query(
+      "SELECT role.id, role.title, role.salary, departments.name FROM role JOIN departments ON role.department_id = departments.id",
+      (err, results) => {
+        console.table(results);
+      }
+    );
   } else if (response.OpeningMenu === "View All Employees") {
-    db.query("SELECT * FROM employees", (err, results) => {
-      console.table(results);
-    });
+    db.query(
+      "SELECT e.id,CONCAT(e.first_name,' ', e.last_name) AS 'Employee', IFNULL( CONCAT(m.first_name,' ', m.last_name),'Executive') AS 'Manager', role.title AS Title, role.salary AS Salary, departments.name AS Dept FROM employees e LEFT JOIN employees m ON m.id = e.manager_id JOIN role ON e.role_id = role.id JOIN departments ON role.department_id = departments.id;",
+      (err, results) => {
+        console.table(results);
+      }
+    );
   } else if (response.OpeningMenu === "Add A Department") {
     // Add department sql
   } else if (response.OpeningMenu === "Add A Role") {

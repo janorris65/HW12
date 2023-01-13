@@ -6,6 +6,7 @@ import {
   addARole,
   questions,
   UpdateARole,
+  ViewByDept,
 } from "./questions.js";
 
 const db = mysql.createConnection(
@@ -52,9 +53,13 @@ inquirer.prompt(questions).then((response) => {
     promptEmployeeQuestions(addAnEmployee);
   } else if (response.OpeningMenu === "Update An Employee Role") {
     promptUpdateQuestions(UpdateARole);
+  } else if (response.OpeningMenu === "View Employees by Dept") {
+    promptViewByDept(ViewByDept);
   }
 });
 
+// Functions for the Cycling of questions and the Code above.
+// ADD department
 function promptDeptQuestions(questionDeptSet) {
   inquirer.prompt(questionDeptSet).then((response) => {
     db.query(
@@ -63,6 +68,8 @@ function promptDeptQuestions(questionDeptSet) {
     promptViewQuestions(questions);
   });
 }
+
+// Add Role
 
 function promptRoleQuestions(questionRoleSet) {
   inquirer.prompt(questionRoleSet).then((response) => {
@@ -73,19 +80,36 @@ function promptRoleQuestions(questionRoleSet) {
   });
 }
 
+// Add employee
+
 function promptEmployeeQuestions(questionRoleSet) {
   inquirer.prompt(questionRoleSet).then((response) => {
     db.query(
-      `INSERT INTO employees (first_name,last_name,role_id,manager_id) VALUES ('${response.employeeFirstName}','${response.employeeLastName}','${response.employeeRoleID}','${response.employeeManagerID}')`
+      `INSERT INTO employees (first_name,last_name,role_id,manager_id) VALUES ('${response.employeeFirstName}','${response.employeeLastName}',${response.employeeRoleID},${response.employeeManagerID})`
     );
     promptViewQuestions(questions);
   });
 }
 
+// Update employee
+
 function promptUpdateQuestions(questionRoleSet) {
   inquirer.prompt(questionRoleSet).then((response) => {
     db.query(
       `UPDATE employees SET role_id = ${response.updateRole} WHERE first_name = '${response.updateFirstName}' AND last_name = '${response.updateLastName}'`
+    );
+    promptViewQuestions(questions);
+  });
+}
+
+// view by dept
+function promptViewByDept(questionRoleSet) {
+  inquirer.prompt(questionRoleSet).then((response) => {
+    db.query(
+      `SELECT e.id,CONCAT(e.first_name," ", e.last_name) AS 'Employee', IFNULL( CONCAT(m.first_name," ", m.last_name),"Executive") AS 'Manager', role.title AS Title, role.salary AS Salary, departments.name AS Dept FROM employees e LEFT JOIN employees m ON m.id = e.manager_id JOIN role ON e.role_id = role.id JOIN departments ON role.department_id = departments.id WHERE department_id = ${response.viewByDeptID}`,
+      (err, results) => {
+        console.table(results);
+      }
     );
     promptViewQuestions(questions);
   });
@@ -129,5 +153,7 @@ function questionSetFollowUp(response) {
     promptEmployeeQuestions(addAnEmployee);
   } else if (response.OpeningMenu === "Update An Employee Role") {
     promptUpdateQuestions(UpdateARole);
+  } else if (response.OpeningMenu === "View Employees by Dept") {
+    promptViewByDept(ViewByDept);
   }
 }

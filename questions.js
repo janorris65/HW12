@@ -7,6 +7,7 @@ const questions = [
       "View All Departments",
       "View All Roles",
       "View All Employees",
+      "View Employees by Dept",
       "Add A Department",
       "Add A Role",
       "Add An Employee",
@@ -82,4 +83,19 @@ const UpdateARole = [
     message: "What is the new role ID?",
   },
 ];
-export { questions, addADepartment, addAnEmployee, addARole, UpdateARole };
+
+const ViewByDept = [
+  {
+    type: "input",
+    name: "viewByDeptID",
+    message: "What is the Dept's ID?",
+  },
+];
+export {
+  questions,
+  addADepartment,
+  addAnEmployee,
+  addARole,
+  UpdateARole,
+  ViewByDept,
+};
